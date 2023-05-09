@@ -20,14 +20,14 @@
 <i><b>Запуск проекта в dev-режиме:</i></b><br>
 ☑ Клонируйте проект с GitHub:</li>
     <blockquote>
-      git@github.com:Vende1337/Friends_app.git
+      https://github.com/Vende1337/Friends_app.git
     </blockquote>  
 ☑ Создайте и активируйте виртуальное окружение:</li>
     <blockquote>
       python -m venv venv<br>
       source venv/Scripts/activate
     </blockquote>  
-☑ Установите зависимости из файла requirements.txt (не забудьте предварительно обновить pip!):</li>
+☑ Установите зависимости из файла requirements.txt (не забудьте предварительно обновить pip и перейти в папку Friends_app/friend):</li>
     <blockquote>
       pip install -r requirements.txt
     </blockquote>
@@ -35,7 +35,7 @@
     <blockquote>
       python manage.py migrate
     </blockquote>
-☑ Создайте суперпользователя для предоставления прав админинстраторам:</li>
+☑ При необходимости создайте суперпользователя для предоставления прав админинстраторам:</li>
     <blockquote>
       python manage.py createsuperuser
     </blockquote>
