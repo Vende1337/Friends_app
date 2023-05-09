@@ -20,7 +20,7 @@
 <i><b>Запуск проекта в dev-режиме:</i></b><br>
 ☑ Клонируйте проект с GitHub:</li>
     <blockquote>
-      https://github.com/Vende1337/Friends_app.git
+      <https://github.com/Vende1337/Friends_app.git>
     </blockquote>  
 ☑ Создайте и активируйте виртуальное окружение:</li>
     <blockquote>
@@ -47,5 +47,32 @@
 
 <i><b>Просматривайте динамическую документацию API вместе с примерами запросов через redoc/swagger (напр., <http://127.0.0.1:8000/redoc/>)</i></b><br>
   
+<i><b>Примеры использования API:</i></b><br>  
+☑ Регистрация пользователя:</li>
+    <blockquote>
+     <http://localhost/api/users/>
+    </blockquote>  
+☑ Просмотр списка друзей:</li>
+    <blockquote>
+      <http://localhost/api/friends/>
+    </blockquote>  
+☑ Отправка запроса на добавление в друзья:</li>
+    <blockquote>
+      <http://localhost/api/friends/requests/send/><br>
+      {<br>
+     "friend": "Valera"<br>
+      }<br>
+    в поле friend укажите username пользователя которому хотите отправить запрос в друзья. 
+    </blockquote>
+☑ Получение входящих запросов на добавление в друзья:</li>
+    <blockquote>
+      http://localhost/api/friends/requests/incoming/
+    </blockquote>    
+☑ Принятие входящего запроса на добавление в друзья:</li>
+    <blockquote>
+      http://localhost/api/friends/requests/incoming/{id}/accept/
+    </blockquote>
+</li>
+
 Авторы:
 <b>Дмитрий Венде</b><br>
