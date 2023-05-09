@@ -20,7 +20,7 @@
 <i><b>Запуск проекта в dev-режиме:</i></b><br>
 ☑ Клонируйте проект с GitHub:</li>
     <blockquote>
-      git@github.com:iArt0s/api_yamdb.git
+      git@github.com:Vende1337/Friends_app.git
     </blockquote>  
 ☑ Создайте и активируйте виртуальное окружение:</li>
     <blockquote>
