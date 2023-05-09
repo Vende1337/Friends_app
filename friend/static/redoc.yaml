@@ -1,0 +1,223 @@
+openapi: 3.0.0
+info:
+  title: My Friendship API
+  description: This is my API description
+  version: '1.0'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - id
+        - username
+        - email
+        - password
+        
+paths:
+  /api/users/:
+    post:
+      summary: Создание пользователя
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - email
+                - password
+      responses:
+        '201':
+          description: Созданный пользователь
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /api/users/{id}:
+    get:
+      summary: Get a user by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: The ID of the user to retrieve
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+  /api/friends/:
+    get:
+      summary: Список друзей.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: The ID of the user to retrieve
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+       
+      security:
+        - bearerAuth: []          
+
+  /api/friends/delete/:
+    delete:
+      summary: "Удаление друга пользователя"
+      description: "Метод для удаления пользователя из списка друзей"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID текущего пользователя"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+        - name: "friends"
+          in: "query"
+          description: "Имя друга, которого нужно удалить из списка друзей"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '204':
+          description: "Вы удалили пользователя {friend} из своего списка друзей!"
+        '404':
+          description: "Пользователь не найден или не является другом текущего пользователя"
+      security:
+        - bearerAuth: []
+
+  /users/{id}/status/:
+    get:
+      summary: Проверка статуса друга пользователя
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: friend
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Статус друга пользователя
+        '404':
+          description: Пользователь не найден
+      security:
+        - bearerAuth: []
+  /api/friends/requests/send/:
+    post:
+      summary: Отправка запроса на добавление в друзья
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                friend:
+                  type: string
+      responses:
+        '200':
+          description: Запрос на добавление в друзья отправлен
+        '400':
+          description: Пользователь уже есть в списке друзей или запрос уже отправлен
+        '404':
+          description: Пользователь не найден
+      security:
+        - bearerAuth: []
+  
+  /api/friends/requests/incoming/:
+    get:
+      summary: Получение входящих запросов на добавление в друзья
+      responses:
+        '200':
+          description: Входящие запросы на добавление в друзья получены
+       
+      security:
+        - bearerAuth: []
+
+  /api/friends/requests/outgoing/:
+    get:
+      summary: Получение исходящих запросов на добавление в друзья
+      responses:
+        '200':
+          description: Исходящие запросы на добавление в друзья получены
+      security:
+        - bearerAuth: []
+
+  /api/friends/requests/incoming/{id}/accept/:
+    get:
+      summary: Принятие входящего запроса на добавление в друзья
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Заявка в друзья принята
+        '404':
+          description: Заявка в друзья не найдена
+      security:
+        - bearerAuth: []
+
+  /api/friends/requests/incoming/{id}/decline/:
+    get:
+      summary: Отклонение входящего запроса на добавление в друзья
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Заявка в друзья отклонена
+        '404':
+          description: Заявка в друзья не найдена
+      security:
+        - bearerAuth: []        
+        
+        
+
